@@ -6,6 +6,11 @@ interface MailChimpURI {
     static String CAMPAIGN_FOLDER = "/campaign-folders"
     static String CAMPAIGN = "/campaigns"
     static String SINGLE_CAMPAIGN = "/campaigns/%s/"
+    static String CAMPAIGN_CONTENT = "/campaigns/%s/content"
+    static String CAMPAIGN_FEEDBACK = "/campaigns/%s/feedback"
+    static String CAMPAIGN_FEEDBACK_MESSAGE = "/campaigns/%s/feedback/%s"
+    static String CAMPAIGN_SEND_CHECKLIST = "/campaigns/%s/send-checklist"
+
     static String CANCEL_CAMPAIGN = "/campaigns/%s/actions/cancel-send"
     static String PAUSE_CAMPAIGN = "/campaigns/%s/actions/pause"
     static String REPLICATE_CAMPAIGN = "/campaigns/%s/actions/replicate"
@@ -13,10 +18,7 @@ interface MailChimpURI {
     static String SCHEDULE_CAMPAIGN = "/campaigns/%s/actions/schedule"
     static String UNSCHEDULE_CAMPAIGN = "/campaigns/%s/actions/unschedule"
     static String SEND_CAMPAIGN = "/campaigns/%s/actions/send"
-    static String CAMPAIGN_CONTENT = "/campaigns/%s/content"
-    static String CAMPAIGN_FEEDBACK = "/campaigns/%s/feedback"
-    static String CAMPAIGN_FEEDBACK_MESSAGE = "/campaigns/%s/feedback/%s"
-    static String CAMPAIGN_SEND_CHECKLIST = "/campaigns/%s/send-checklist"
+
     static String SEARCH_CAMPAIGN = "/search-campaigns"
     static String FILE_MANAGER_FILES = "/file-manager/files"
     static String FILE_MANAGER_SPECIFIC = "/file-manager/files/%s"

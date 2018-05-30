@@ -5,7 +5,9 @@ import com.mailchimp.connection.HttpClientConnection
 import com.mailchimp.connection.Response
 import com.mailchimp.exception.MailChimpException
 import com.mailchimp.model.Campaign
+import com.mailchimp.model.content.Content
 import com.mailchimp.request.CampaignRequest
+import com.mailchimp.request.ContentRequest
 import com.mailchimp.response.DeleteResponse
 import com.mailchimp.response.ErrorResponse
 import com.mailchimp.response.ListResponse
@@ -37,94 +39,110 @@ class MailChimpClient {
     }
 
     Campaign createCampaign(CampaignRequest request) {
-        return post(MailChimpURI.CAMPAIGN, request, Campaign.class)
+        post(MailChimpURI.CAMPAIGN, request, Campaign.class)
     }
 
     ListResponse<Campaign> listAllCampaign() {
-        return list(MailChimpURI.CAMPAIGN, Campaign.class)
+        list(MailChimpURI.CAMPAIGN, Campaign.class)
     }
 
     Campaign listCampaign(String campaignId) {
-        return getCall(format(MailChimpURI.SINGLE_CAMPAIGN, campaignId), Campaign.class)
+        getCall(format(MailChimpURI.SINGLE_CAMPAIGN, campaignId), Campaign.class)
     }
 
     DeleteResponse deleteCampaign(String campaignId) {
-        return delete(format(MailChimpURI.SINGLE_CAMPAIGN, campaignId), DeleteResponse.class)
+        delete(format(MailChimpURI.SINGLE_CAMPAIGN, campaignId), DeleteResponse.class)
     }
 
     Campaign updateCampaign(String campaignId, CampaignRequest request) {
-        return post(format(MailChimpURI.SINGLE_CAMPAIGN, campaignId), request, Campaign.class)
+        post(format(MailChimpURI.SINGLE_CAMPAIGN, campaignId), request, Campaign.class)
     }
 
-    void cancelSendCampaign(String campaignId, CampaignRequest request) {
-        post(format(MailChimpURI.CANCEL_CAMPAIGN, campaignId), request, Campaign.class)
+    Content updateContentOfCampaign(String campaignId, ContentRequest request) {
+        put(format(MailChimpURI.CAMPAIGN_CONTENT, campaignId), request, Content.class)
     }
 
-    void pauseCampaign(String campaignId, CampaignRequest request) {
-        post(format(MailChimpURI.PAUSE_CAMPAIGN, campaignId), request, Campaign.class)
+    void cancelSendCampaign(String campaignId) {
+        postAction(format(MailChimpURI.CANCEL_CAMPAIGN, campaignId))
     }
 
-    void replicateCampaign(String campaignId, CampaignRequest request) {
-        post(format(MailChimpURI.REPLICATE_CAMPAIGN, campaignId), request, Campaign.class)
+    void pauseCampaign(String campaignId) {
+        postAction(format(MailChimpURI.PAUSE_CAMPAIGN, campaignId))
     }
 
-    void resumeCampaign(String campaignId, CampaignRequest request) {
-        post(format(MailChimpURI.RESUME_CAMPAIGN, campaignId), request, Campaign.class)
+    void replicateCampaign(String campaignId) {
+        postAction(format(MailChimpURI.REPLICATE_CAMPAIGN, campaignId))
     }
 
-    void scheduleCampaign(String campaignId, CampaignRequest request) {
-        post(format(MailChimpURI.SCHEDULE_CAMPAIGN, campaignId), request, Campaign.class)
+    void resumeCampaign(String campaignId) {
+        postAction(format(MailChimpURI.RESUME_CAMPAIGN, campaignId))
     }
 
-    void sendCampaign(String campaignId, CampaignRequest request) {
-        post(format(MailChimpURI.SEND_CAMPAIGN, campaignId), request, Campaign.class)
+    void scheduleCampaign(String campaignId) {
+        postAction(format(MailChimpURI.SCHEDULE_CAMPAIGN, campaignId))
     }
 
-    void unScheduleCampaign(String campaignId, CampaignRequest request) {
-        post(format(MailChimpURI.UNSCHEDULE_CAMPAIGN, campaignId), request, Campaign.class)
+    void sendCampaign(String campaignId) {
+        postAction(format(MailChimpURI.SEND_CAMPAIGN, campaignId))
+    }
+
+    void unScheduleCampaign(String campaignId) {
+        postAction(format(MailChimpURI.UNSCHEDULE_CAMPAIGN, campaignId))
     }
 
     protected <T> T getCall(String path, Class<T> responseClass) {
-        return getCall(endpoint, path, responseClass)
+        getCall(endpoint, path, responseClass)
     }
 
     protected <T> T getCall(String endpoint, String path, Class<T> responseClass) {
         Response response = connection.get(endpoint + path, buildHeaders())
         ensureSuccess(response)
-        return objectSerializer.deserialize(response.body, responseClass)
+        objectSerializer.deserialize(response.body, responseClass)
     }
 
     protected <T> T post(String path, Object request, Class<T> responseClass) {
         String requestBody = objectSerializer.serialize(request)
         Response response = connection.post(endpoint + path, requestBody, buildHeaders())
         ensureSuccess(response)
-        return objectSerializer.deserialize(response.body, responseClass)
+        objectSerializer.deserialize(response.body, responseClass)
+    }
+
+    protected <T> T put(String path, Object request, Class<T> responseClass) {
+        String requestBody = objectSerializer.serialize(request)
+        Response response = connection.put(endpoint + path, requestBody, buildHeaders())
+        ensureSuccess(response)
+        objectSerializer.deserialize(response.body, responseClass)
+    }
+
+    protected void postAction(String path) {
+        Response response = connection.post(endpoint + path, "", buildHeaders())
+        ensureSuccess(response)
     }
 
     protected <T> ListResponse<T> list(String path, Class<T> elementClass) {
-        return list(endpoint, path, null, elementClass)
+        list(endpoint, path, null, elementClass)
     }
 
     protected <T> ListResponse<T> list(String path, Object request, Class<T> elementClass) {
-        return list(endpoint, path, request, elementClass)
+        list(endpoint, path, request, elementClass)
     }
 
     protected <T> ListResponse<T> list(String endpoint, String path, Object request, Class<T> elementClass) {
         String url = buildQueryString(endpoint + path, request)
         Response response = connection.get(url, buildHeaders())
         ensureSuccess(response)
-        return objectSerializer.deserializeList(response.body, elementClass)
+        objectSerializer.deserializeList(response.body, elementClass)
     }
 
     protected <T> T delete(String path, Class<T> responseClass) {
-        return delete(path, null, responseClass)
+        delete(path, null, responseClass)
     }
 
     protected <T> T delete(String path, Object request, Class<T> responseClass) {
         String url = buildQueryString(endpoint + path, request)
         Response response = connection.delete(url, buildHeaders())
         ensureSuccess(response)
-        return objectSerializer.deserialize(response.body, responseClass)
+        objectSerializer.deserialize(response.body, responseClass)
     }
 
     private Response ensureSuccess(Response response) {

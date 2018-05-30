@@ -5,6 +5,8 @@ interface Connection extends Closeable {
 
     Response post(String url, String requestBody, Map<String, String> headers)
 
+    Response put(String url, String requestBody, Map<String, String> headers)
+
     Response delete(String url, Map<String, String> headers)
 
     Response multipart(String url, Map<String, File> files, Map<String, String> form, Map<String, String> headers)
