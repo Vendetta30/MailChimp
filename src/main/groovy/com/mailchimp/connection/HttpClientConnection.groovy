@@ -37,6 +37,12 @@ class HttpClientConnection implements Connection {
         return execute(post, headers)
     }
 
+    Response postAction(String url, String requestBody, Map<String, String> headers) {
+        HttpPost post = new HttpPost(url)
+        post.setEntity(new StringEntity(requestBody, UTF8))
+        return execute(post, headers)
+    }
+
     Response put(String url, String requestBody, Map<String, String> headers) {
         HttpPut put = new HttpPut(url)
         if (requestBody != null) {

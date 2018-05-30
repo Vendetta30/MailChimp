@@ -115,7 +115,7 @@ class MailChimpClient {
     }
 
     protected void postAction(String path) {
-        Response response = connection.post(endpoint + path, "", buildHeaders())
+        Response response = connection.postAction(endpoint + path, "", buildHeaders())
         ensureSuccess(response)
     }
 
