@@ -85,7 +85,6 @@ class MailChimpClient {
     }
 
     protected <T> T getCall(String path, Class<T> responseClass) {
-        println(endpoint)
         return getCall(endpoint, path, responseClass)
     }
 
@@ -97,7 +96,6 @@ class MailChimpClient {
 
     protected <T> T post(String path, Object request, Class<T> responseClass) {
         String requestBody = objectSerializer.serialize(request)
-        println(endpoint)
         Response response = connection.post(endpoint + path, requestBody, buildHeaders())
         ensureSuccess(response)
         return objectSerializer.deserialize(response.body, responseClass)

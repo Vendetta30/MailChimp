@@ -1,18 +1,18 @@
 package com.mailchimp
 
-class MailChimpURI {
+interface MailChimpURI {
 
-    protected static String VERSION = "3.0"
+    static String VERSION = "3.0"
     static String CAMPAIGN_FOLDER = "/campaign-folders"
-    protected static String CAMPAIGN = "/campaigns"
-    protected static String SINGLE_CAMPAIGN = "/campaigns/%s/"
-    protected static String CANCEL_CAMPAIGN = "/campaigns/%s/actions/cancel-send"
-    protected static String PAUSE_CAMPAIGN = "/campaigns/%s/actions/pause"
-    protected static String REPLICATE_CAMPAIGN = "/campaigns/%s/actions/replicate"
-    protected static String RESUME_CAMPAIGN = "/campaigns/%s/actions/resume"
-    protected static String SCHEDULE_CAMPAIGN = "/campaigns/%s/actions/schedule"
-    protected static String UNSCHEDULE_CAMPAIGN = "/campaigns/%s/actions/unschedule"
-    protected static String SEND_CAMPAIGN = "/campaigns/%s/actions/send"
+    static String CAMPAIGN = "/campaigns"
+    static String SINGLE_CAMPAIGN = "/campaigns/%s/"
+    static String CANCEL_CAMPAIGN = "/campaigns/%s/actions/cancel-send"
+    static String PAUSE_CAMPAIGN = "/campaigns/%s/actions/pause"
+    static String REPLICATE_CAMPAIGN = "/campaigns/%s/actions/replicate"
+    static String RESUME_CAMPAIGN = "/campaigns/%s/actions/resume"
+    static String SCHEDULE_CAMPAIGN = "/campaigns/%s/actions/schedule"
+    static String UNSCHEDULE_CAMPAIGN = "/campaigns/%s/actions/unschedule"
+    static String SEND_CAMPAIGN = "/campaigns/%s/actions/send"
     static String CAMPAIGN_CONTENT = "/campaigns/%s/content"
     static String CAMPAIGN_FEEDBACK = "/campaigns/%s/feedback"
     static String CAMPAIGN_FEEDBACK_MESSAGE = "/campaigns/%s/feedback/%s"
