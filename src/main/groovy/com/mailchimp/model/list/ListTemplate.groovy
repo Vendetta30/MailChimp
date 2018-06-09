@@ -1,8 +1,10 @@
-package com.mailchimp.model
+package com.mailchimp.model.list
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.mailchimp.model.Contact
+import com.mailchimp.model.Link
 import com.mailchimp.model.campaign.CampaignDefault
 
 @JsonIgnoreProperties(ignoreUnknown = true)
