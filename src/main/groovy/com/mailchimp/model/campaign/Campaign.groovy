@@ -1,8 +1,12 @@
-package com.mailchimp.model
+package com.mailchimp.model.campaign
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.mailchimp.model.DeliveryStatus
+import com.mailchimp.model.Link
+import com.mailchimp.model.Recipient
+import com.mailchimp.model.Setting
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)

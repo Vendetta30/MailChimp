@@ -1,4 +1,4 @@
-package com.mailchimp.model
+package com.mailchimp.model.campaign
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude

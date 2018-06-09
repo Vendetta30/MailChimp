@@ -1,15 +1,23 @@
-package com.mailchimp.model
+package com.mailchimp.model.template
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.mailchimp.model.Link
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-class FileManagerFolder {
+class Template {
     Integer id
-    Integer fileCount
+    String type
     String name
-    String createdAt
+    Boolean dragAndDrop
+    Boolean responsive
+    String category
+    String dateCreated
     String createdBy
+    Boolean active
+    String folderId
+    String thumbnail
+    String shareUrl
     List<Link> links
 }

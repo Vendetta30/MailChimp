@@ -2,7 +2,7 @@ package com.mailchimp.client
 
 import com.mailchimp.MailChimpClient
 import com.mailchimp.MailChimpURI
-import com.mailchimp.model.FileManagerFile
+import com.mailchimp.model.fileManager.FileManagerFile
 import com.mailchimp.request.FileManagerFileRequest
 import com.mailchimp.response.DeleteResponse
 import com.mailchimp.response.ListResponse

@@ -2,7 +2,7 @@ package com.mailchimp.client
 
 import com.mailchimp.MailChimpClient
 import com.mailchimp.MailChimpURI
-import com.mailchimp.model.Campaign
+import com.mailchimp.model.campaign.Campaign
 import com.mailchimp.model.content.Content
 import com.mailchimp.request.CampaignRequest
 import com.mailchimp.request.ContentRequest
