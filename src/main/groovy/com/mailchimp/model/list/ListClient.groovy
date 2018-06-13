@@ -8,6 +8,7 @@ import com.mailchimp.model.Link
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class ListClient {
+    Client clients
     @JsonProperty("list_id")
     String listId
     @JsonProperty("total_items")
